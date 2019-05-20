@@ -3,17 +3,17 @@ import speech_recognition as sr
 import datetime
 import wikipedia
 import webbrowser
+import os
+import smtplib
 
 engine =pyttsx3.init('sapi5')
 voices =engine.getProperty('voices')
 print(voices)
 engine.setProperty('voice',voices[0].id)
 
-
 def speak(audio):
   engine.say(audio)
   engine.runAndWait()
-
 
 def wishMe():
   hour =int(datetime.datetime.now().hour)
@@ -43,9 +43,11 @@ def takeCommand():
     speak("Sorry sir,I couldn't recognise what you said..")
     print("Say that again Please...")
     return "None"
+  return query
 
-  return query;
-
+def sendMsg(to,msg):
+  server =smtplib.SMPT('smntp.gmail.com',587)
+  sever
 
 if __name__=="__main__":
   wishMe()
@@ -62,8 +64,8 @@ if __name__=="__main__":
     elif 'open youtube' in quer:
       webbrowser.open("youtube.com")
     
-    elif 'open open' in quer:
-      webbrowser.open("open.com")
+    elif 'open google' in quer:
+      webbrowser.open("google.com")
 
     elif 'open Stackoverflow' in quer:
       webbrowser.open("stackoverflow.com")
@@ -74,9 +76,18 @@ if __name__=="__main__":
     elif 'spotify' in quer:
       webbrowser.open("spotify.com")
 
+    elif 'time' in quer:
+      timerans=datetime.datetime.now().strftime("%H:%M:%S")
+      speak(f"sir, the time is {timerans}")
     
+    elif 'open code' in quer:
+      cpath="C:\Users\vashi\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Visual Studio Code"
+      os.startfile(cpath)
 
+    elif 'message to buddies' in quer:
+      try:
+        speak("what should i say")
+        msg=takeCommand()
+        receiver='vashistrhythm1@gmail.com'
+        sendMsg(receiver,msg)
 
-
-
-  #speak("hello sir")
