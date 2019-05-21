@@ -46,8 +46,13 @@ def takeCommand():
   return query
 
 def sendMsg(to,msg):
-  server =smtplib.SMPT('smntp.gmail.com',587)
-  sever
+  #you had to enable less secure apps for this method to work completely
+  server =smtplib.SMPT('smtp.gmail.com',587)
+  server.ehlo()
+  server.starttls()
+  server.login('sender email','password')
+  server.sendmail('email sender',to,msg)
+  server.close()
 
 if __name__=="__main__":
   wishMe()
@@ -81,7 +86,8 @@ if __name__=="__main__":
       speak(f"sir, the time is {timerans}")
     
     elif 'open code' in quer:
-      cpath="C:\Users\vashi\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Visual Studio Code"
+      #path for the program to be opened i used it for vscode
+      cpath = "C:\Users\vashi\Microsoft VS Code\Code.exe"
       os.startfile(cpath)
 
     elif 'message to buddies' in quer:
@@ -90,4 +96,10 @@ if __name__=="__main__":
         msg=takeCommand()
         receiver='vashistrhythm1@gmail.com'
         sendMsg(receiver,msg)
+        speak("email has been sent")
+      except Exception as e:
+        print(e)
+        speak("sorry sir i wasn't able to send email")
+      
+
 
