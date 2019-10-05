@@ -1,1 +1,8 @@
 
+ pyttsx3
+ speech_recognition
+ datetime
+ wikipedia
+ webbrowser
+ os
+ smtpli
